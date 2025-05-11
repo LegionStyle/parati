@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #ffebee;
+            background-color: #e9b7b7;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -34,6 +34,14 @@
             max-width: 500px;
             margin: 0 auto 30px;
             line-height: 1.6;
+            text-shadow: 
+        0 0 5px #ff69b4,
+        0 0 10px #ff69b4,
+        0 0 15px #ff69b4,
+        0 0 20px #ff1493,
+        0 0 25px #ff1493;
+    color: white;
+    animation: brillar 2s infinite alternate;
         }
         
         .rose {
@@ -41,8 +49,10 @@
             width: 40px;
             height: 40px;
             pointer-events: none;
-            animation: float 4s ease-in-out infinite;
+            animation: float 2s ease-in-out infinite;
             opacity: 0;
+            will-change: transform, opacity; /* Mejora rendimiento */
+    transform: translateZ(0); /* Acelera hardware acceleration */
         }
         
         .petals {
@@ -100,14 +110,59 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
+
+        .brillante {
+    text-shadow: 
+        0 0 5px #ff69b4,
+        0 0 10px #ff69b4,
+        0 0 15px #ff69b4,
+        0 0 20px #ff1493,
+        0 0 25px #ff1493;
+    color: white;
+    animation: brillar 2s infinite alternate;
+}
+
+@keyframes brillar {
+    from {
+        text-shadow: 
+            0 0 5px #ff69b4,
+            0 0 10px #ff69b4,
+            0 0 15px #ff69b4,
+            0 0 20px #ff1493;
+    }
+    to {
+        text-shadow: 
+            0 0 10px #ff69b4,
+            0 0 20px #ff69b4,
+            0 0 30px #ff69b4,
+            0 0 40px #ff1493,
+            0 0 50px #ff1493;
+    }
+}@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        max-width: 95%;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .message {
+        font-size: 1rem;
+    }
+}
+
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Para Ti 💖</h1>
+        <h1 class="brillante">¡Feliz dia de la Madre 💖!</h1>
         <div class="message">
-            Cada rosa representa algo especial que quiero decirte cada dia . 
-            Haz clic en el botón para ver más rosas y descubre el mensaje oculto.
+            Mamá, hoy y siempre quiero recordarte lo especial que eres para mí. 
+            Cada rosa representa todo el amor que siento por ti. 
+        
+            <p>Haz clic en el botón para ver más rosas y descubre el mensaje oculto.</p>
         </div>
         <button id="moreRoses">Ver más rosas</button>
     </div>
@@ -117,26 +172,28 @@
             const button = document.getElementById('moreRoses');
             const body = document.body;
             const messages = [
-                "Eres especial",
-                "Me haces feliz",
-                "Te aprecio mucho",
-                "Eres única",
-                "Gracias por existir",
-                "Eres increíble",
-                "Mi día es mejor contigo",
-                "Eres mi inspiración"
+                "Eres la mejor mamá del mundo",
+                "Tu amor es mi mayor fortaleza",
+                "Gracias por tu sacrificio y dedicación",
+                "Eres mi ejemplo a seguir",
+                "Tu abrazo es mi lugar favorito",
+                "Nada se compara a tu amor incondicional",
+                "Eres mi ángel en la tierra",
+                "Gracias por darme la vida y tanto amor",
+                "Eres la reina de nuestro hogar",
+                "Tu sonrisa ilumina mis días"
             ];
             
             let messageIndex = 0;
             
             // Crear rosas iniciales
-            for (let i = 0; i < 5; i++) {
-                setTimeout(createRose, i * 300);
+            for (let i = 0; i < 100; i++) {
+                setTimeout(createRose, i * 400);
             }
             
             button.addEventListener('click', function() {
                 // Crear más rosas
-                for (let i = 0; i < 8; i++) {
+                for (let i = 0; i < 20; i++) {
                     setTimeout(createRose, i * 200);
                 }
                 
@@ -152,7 +209,7 @@
                 
                 // Cambiar el texto del botón si ya se mostraron todos los mensajes
                 if (messageIndex >= messages.length) {
-                    button.textContent = "¡Gracias por estar aquí!";
+                    button.textContent = "¡Te quiero mucho Mamá!";
                     button.style.backgroundColor = '#4caf50';
                 }
             });
@@ -167,7 +224,7 @@
                 rose.style.bottom = '-50px';
                 
                 // Tamaño aleatorio
-                const size = 30 + Math.random() * 30;
+                const size = 50 + Math.random() * 40;
                 rose.style.width = size + 'px';
                 rose.style.height = size + 'px';
                 
@@ -241,10 +298,10 @@
             
             // Crear rosas continuamente en segundo plano
             setInterval(() => {
-                if (Math.random() > 0.7) { // 30% de probabilidad de crear una rosa
+                if (Math.random() > 0.5) { // 30% de probabilidad de crear una rosa
                     createRose();
                 }
-            }, 1000);
+            }, isMobile ? 2000 : 800);
         });
     </script>
 </body>
