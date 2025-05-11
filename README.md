@@ -1,2 +1,1 @@
-# parati
-dedicado a ti 
+
